@@ -1,0 +1,63 @@
+Questions 1: 
+	Find out the drivers who are booked for legal action: All such license numbers are to be output in a 	file called “violators.txt”.
+
+Analysis :
+--------
+
+1.Process the input file and prepare the Arraylist requires
+	 size(n) where n=total number of records in input file
+  	 Time o(n) to prepare the list of size(n)
+
+2.Preparing Hash required 
+	 size(k<=n) to keep all the license no of size n 
+	 Time to insert (Search+update/Search+New entry) in Hash
+
+         Worst Case 1: // All elements are in one bucket
+	 Search +update = o(k)+o(1) = Search will take o(k), update constant time o(1) for each element- Worst case
+	 Search+ insert(New)= o(k)+o(1) = Search will take o(k) New entry constant time o(1) for each element.-Worst case 
+			Search+update/insert
+	 1st element = o(1)+0(1)
+	 2nd 	       o(2)+o(1)
+	 kth	       o(k-1)+o(1)
+	For all K = 1+2+3+....+k-1 =0(k2) = O(K^2) - Worst case 
+	
+	Average Case 2:
+	Search +update = o(1)+o(1) = Search will take o(1), update constant time o(1) for each element - Average case
+	Search+ insert(New)= o(1)+o(1) = Search will take o(1), New entry constant time o(1) for each element.-Average case
+
+3. Processing of Hash &prparing the list of the all violators who violated > 3 :
+	 size(k2<=n) K2 is size of Arraylist to keep all violators
+	 Time 0(k1+k2) where 0(k1=hashSize) for Hash Processing to find all violators >3
+			0(k2<=k1) for prparing the Array list of k2 violators.
+			k2<=k1<n
+4. File reading/writing depends upone the size of file 
+	   Time to read/write o(n) where n is the no of records 
+
+
+Questions 2: 
+	Find out the policemen who are eligible for bonus: The list of policemen eligible for bonus must be output in a file called “bonus.txt”.
+
+
+Analysis 
+-----------
+
+1.Process the input file and prepare the Arraylist requires
+	 size(n) where n=total number of records in input file
+  	 Time o(n) to prepare the Arraylist of size(n)
+
+2. Prepare the Binary Tree from the list 
+	Size(n) to prepare the binary tree order by Police id where n is no of records+
+	Size(k<=n) of Arraylist to insert all police men who has fined >.9*max
+	Time is o(h) or o(n) to prepare the binary tree order by police id +
+	Time is o(h) or o(n) to reorder(postorder traversal+update link of node) the binary tree order by Amount+
+	Time is o(h) to get the maximum fined by any police +
+	Time is o(h) or o(n) to iterate through each node to check the bonus eligibility 
+
+3. File reading/writing depends upone the size of file 
+	   Time to read/write o(n) where n is the no of records 
+
+Performance Imporvement 
+---------------------
+1. Create the BinaryTree order by Amount at start (processing time) instead by Police ID.
+2. At the time of Processing ,we can check all the processed amount and get it max at time of processing
+These will improve 2o(h)/2o(n)
